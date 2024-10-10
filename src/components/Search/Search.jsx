@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import useDebounce from '../../hooks/useDebouncer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass, faXmark } from '@fortawesome/free-solid-svg-icons';
-import { SignedIn, UserButton } from '@clerk/clerk-react';
+import { SignedIn, UserButton, useUser } from '@clerk/clerk-react';
 
 function Search({ onSearch }) {
   const [searchValue, setSearchValue] = useState('');
@@ -58,6 +58,8 @@ function Search({ onSearch }) {
     searchInput.current.focus();
   }, []);
 
+  const { user } = useUser();
+
   return (
     <div className="relative flex items-center justify-end space-x-4 pb-6">
       <select
@@ -94,7 +96,18 @@ function Search({ onSearch }) {
         )}
       </div>
       <SignedIn>
-        <UserButton />
+        {' '}
+        {user && <p className="hidden md:block">{user.username}</p>}
+        <div className="hidden md:block">
+          <UserButton
+            appearance={{
+              elements: {
+                userButtonAvatarBox: 'w-10 h-10',
+                userButtonOuter: 'p-3',
+              },
+            }}
+          />
+        </div>
       </SignedIn>
     </div>
   );

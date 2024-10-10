@@ -3,7 +3,7 @@ import { FaLinkedin, FaUser } from 'react-icons/fa';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCode, faMoon, faSun } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
-import { SignedOut, SignInButton, SignInButtonr } from '@clerk/clerk-react';
+import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/clerk-react';
 
 function Sidebar() {
   const navigate = useNavigate();
@@ -54,6 +54,20 @@ function Sidebar() {
               <FontAwesomeIcon icon={faMoon} fontSize="1rem" />
             )}
           </button>
+        </div>
+        <div className="md:hidden ">
+          <SignedIn>
+            <div className="flex items-center justify-center">
+              <UserButton
+                appearance={{
+                  elements: {
+                    userButtonAvatarBox: 'w-8 h-8',
+                    userButtonOuter: 'p-3',
+                  },
+                }}
+              />
+            </div>
+          </SignedIn>
         </div>
       </div>
       <div className="text-secondaryColor dark:text-white">
