@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import useDebounce from '../../hooks/useDebouncer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { SignedIn, UserButton } from '@clerk/clerk-react';
 
 function Search({ onSearch }) {
   const [searchValue, setSearchValue] = useState('');
@@ -92,6 +93,9 @@ function Search({ onSearch }) {
           />
         )}
       </div>
+      <SignedIn>
+        <UserButton />
+      </SignedIn>
     </div>
   );
 }
